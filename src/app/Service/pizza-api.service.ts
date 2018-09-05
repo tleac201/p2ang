@@ -150,7 +150,7 @@ export class PizzaAPIService {
   }
 
   getCart() {
-    return this.client.get<ShoppingCartViewModel>(this.urlSC+'/');
+    return this.client.get<ShoppingCartViewModel>(this.urlSC);
   }
 }
 
