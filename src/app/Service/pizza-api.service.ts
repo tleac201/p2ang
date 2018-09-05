@@ -44,6 +44,7 @@ export class PizzaAPIService {
     return throwError(
       'Something bad happened; please try again later.');
   };
+
   login(login: Login): Observable<HttpResponse<loginResponse>>{
     var options = {
       headers: new HttpHeaders({
@@ -59,6 +60,20 @@ export class PizzaAPIService {
        this.urlAccount+"/Login", JSON.stringify(login), options
     )
   }
+
+  register(resgisters: AccountRegister): Observable<HttpResponse<AccountRegister>> {
+    var options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      observe: 'response' as 'response'
+    };
+    var response =  this.client.post<AccountRegister>(
+      this.urlAccount+"/Register", JSON.stringify(resgisters), options
+    )
+      return response;
+  }
+
 
   getAccount(id) {
     var newUrl = this.urlAccount + `/${id}`;
@@ -76,10 +91,9 @@ export class PizzaAPIService {
       Email: newAccount.Email,
       Password: newAccount.Password,
       ConfirmPassword: newAccount.ConfirmPassword,
-      Firstname: newAccount.Firstname,
-      Lastname: newAccount.Lastname,
-      PhoneNumber: newAccount.PhoneNumber,
-      Active: newAccount.Active
+      FirstName: newAccount.FirstName,
+      LastName: newAccount.LastName,
+      Phone: newAccount.Phone
     };
     return this.client.post<AccountRegister>(this.urlAccount, body, {
       headers
@@ -92,10 +106,9 @@ export class PizzaAPIService {
       Email: editAccount.Email,
       Password: editAccount.Password,
       ConfirmPassword: editAccount.ConfirmPassword,
-      Firstname: editAccount.Firstname,
-      Lastname: editAccount.Lastname,
-      PhoneNumber: editAccount.PhoneNumber,
-      Active: editAccount.Active
+      FirstName: editAccount.FirstName,
+      LastName: editAccount.LastName,
+      Phone: editAccount.Phone
     };
     return this.client.put<AccountRegister>(this.urlAccount + '/' + editAccount, body, {
       headers
@@ -141,14 +154,12 @@ export class loginResponse {
 }
 
 export class AccountRegister {
-  Id?: number
   Email: string;
   Password: string;
   ConfirmPassword: string;
-  Firstname: string;
-  Lastname: string;
-  PhoneNumber: string;
-  Active: boolean;
+  FirstName: string;
+  LastName: string;
+  Phone: string;
 }
 
 export class Ingredients {

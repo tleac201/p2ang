@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs';
 import { AccountRegister } from '../service/pizza-api.service';
 import { PizzaAPIService } from '../service/pizza-api.service';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-register-api',
@@ -10,15 +11,37 @@ import { PizzaAPIService } from '../service/pizza-api.service';
 })
 export class RegisterAPIComponent implements OnInit {
 
+  Resgister: AccountRegister;
+  Email: string;
+  Password: string;
+  ConfirmPassword: string;
+  FirstName: string;
+  LastName: string;
+  Phone: string;
   accounts: AccountRegister[];
   account: AccountRegister;
   accountToAdd: AccountRegister;
 
-  constructor(private accountService: PizzaAPIService) {
-
+  constructor(private accountService: PizzaAPIService, private route:ActivatedRoute, private router:Router) {
+    this.Resgister = new AccountRegister();
   }
 
   ngOnInit() {
+  }
+
+  register(email: string, password: string, confirmpassword: string, firstname:string, lastname:string, phonenumber:string) {
+    this.Resgister.Email = email;
+    this.Resgister.Password = password;
+    this.Resgister.ConfirmPassword = confirmpassword;
+    this.Resgister.FirstName = firstname;
+    this.Resgister.LastName = lastname;
+    this.Resgister.Phone = phonenumber;
+
+    this.accountService.register(this.Resgister)
+    .subscribe(a => {
+      this.Resgister = a.body;
+      console.log(this.Resgister);
+    })
   }
 
   getAccount(id) {
@@ -58,4 +81,7 @@ export class RegisterAPIComponent implements OnInit {
       });
   }
 
+  SendToLogin(){
+    this.router.navigate(['']);
+  }
 }
