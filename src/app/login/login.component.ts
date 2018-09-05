@@ -43,6 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   SendToRegister(){
-    this.router.navigate(['register']);
+    this.router.navigate(['registerAPI']);
   }
 }

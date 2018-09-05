@@ -1,3 +1,17 @@
-<p>
-  register-api works!
-</p>
+<form>
+  Email:<br>
+  <input type="text" #email><br>
+  Password:<br>
+  <input type="password" #password><br>
+  Confirm Password:<br>
+  <input type="password" #confirmpassword><br>
+  First Name:<br>
+  <input type="text" #firstname><br>
+  Last Name:<br>
+  <input type="text" #lastname><br>
+  Phone Number:<br>
+  <input type="text" #phonenumber>
+  <br><br>
+  <input type="submit" value="Submit" (click)="register(email.value, password.value, confirmpassword.value, 
+  firstname.value, lastname.value, phonenumber.value)" (click)="SendToLogin()">
+</form>
