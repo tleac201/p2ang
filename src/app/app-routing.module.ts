@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegisterAPIComponent } from './register-api/register-api.component';
 import { StandardproductApiComponent } from './standardproduct-api/standardproduct-api.component';
 import { IngredientApiComponent } from './ingredient-api/ingredient-api.component';
+import { ShoppingcartApiComponent } from './shoppingcart-api/shoppingcart-api.component';
 
 const routes: Routes = [
   {path: '', component:LoginComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'registerAPI', component:RegisterAPIComponent},
   {path: 'standardproductAPI', component:StandardproductApiComponent},
-  {path: 'ingredientAPI', component:IngredientApiComponent}
+  {path: 'ingredientAPI', component:IngredientApiComponent},
+  {path: 'shoppingcartAPI', component:ShoppingcartApiComponent}
 ];
 
 @NgModule({

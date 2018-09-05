@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PizzaAPIService } from '../Service/pizza-api.service';
+import { ShoppingCartItem } from '../standardproduct-api/standardproduct-api.component';
 
 @Component({
   selector: 'app-shoppingcart-api',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingcartApiComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private Service: PizzaAPIService) { }
+  ShoppingCartItems : ShoppingCartItem[]
+  
   ngOnInit() {
+    
   }
 
 }

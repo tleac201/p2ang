@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { StandardProducts } from '../service/pizza-api.service';
 import { PizzaAPIService } from '../service/pizza-api.service';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-standardproduct-api',
@@ -13,23 +15,40 @@ export class StandardproductApiComponent implements OnInit {
   standardproducts: StandardProducts[];
   standardproduct: StandardProducts;
   standardproductToAdd: StandardProducts;
-  //selectedSP: StandardProducts[];
-  Checked : boolean[];
+  shoppingCartVms: ShoppingCartItem[];
+  message: string;
 
   constructor(private standardproductService: PizzaAPIService, 
     private route:ActivatedRoute, private router:Router ) { }
 
   ngOnInit() {
     this.getStandardProducts()
+    console.log(this.standardproducts);
+    console.log(this.standardproducts.length);
+    for(let sp of this.standardproducts) {
+      let scVM = new ShoppingCartItem();
+      scVM.ProductId = sp.StandardProductId;
+      scVM.Quantity = 0;
+      scVM.Standard = true;
+      this.shoppingCartVms.push(scVM);
+    }
   }
 
-  checked(id) {
-    if(!this.Checked[id]) {
-      this.Checked[id] = true;
-    }
-    else {
-      this.Checked[id] = false;
-    }
+  add(id) {
+    let item = new ShoppingCartItem();
+    item.ProductId = id;
+    item.Quantity = 1;
+    item.Standard = true;
+    console.log(item);
+    this.standardproductService.addProductToCart(item)
+      .subscribe(a => {
+        if(a.Id != undefined) {
+          alert(`1 ${this.standardproducts[id - 1].Name} placed in cart.`); 
+        }
+        else{
+          alert("There was an error processing your request.");
+        } 
+      });
   }
 
   getStandardProduct(id) {
@@ -64,4 +83,10 @@ export class StandardproductApiComponent implements OnInit {
     SendToHome(){
       this.router.navigate(['home']);
     }
+}
+export class ShoppingCartItem {
+  Id? : number;
+  ProductId : number;
+  Standard : boolean;
+  Quantity : number;
 }

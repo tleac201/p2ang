@@ -5,7 +5,7 @@ import { FormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TJsPizzaComponent } from './tjs-pizza/tjs-pizza.component';
 import { LoginComponent } from './login/login.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { RegisterAPIComponent } from './register-api/register-api.component';
 import { IngredientApiComponent } from './ingredient-api/ingredient-api.component';

@@ -6,7 +6,7 @@ import { delay } from 'rxjs/internal/operators';
 import { catchError, retry } from 'rxjs/operators';
 import { JsonPipe } from '@angular/common';
 import { resolve, reject } from 'q';
-
+import { ShoppingCartItem } from '../standardproduct-api/standardproduct-api.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ import { resolve, reject } from 'q';
 export class PizzaAPIService {
 
   url: string = "https://revproject2api.azurewebsites.net/api";
+  //url: string = "http://localhost:55672/api";
   urlAccount = this.url+"/Account";
   urlIngredients: string = this.url+"/Ingredients";
   urlSP: string = this.url+"/StandardProducts";
@@ -114,6 +115,11 @@ export class PizzaAPIService {
 
   getStandardProducts() {
     return this.client.get<StandardProducts[]>(this.urlSP);
+  }
+
+  addProductToCart(item : ShoppingCartItem) {
+    const headers = new HttpHeaders().set('content-type', 'application/json');
+    return this.client.post<ShoppingCartItem>(this.urlSC, JSON.stringify(item), {headers});
   }
 
   addStandardProduct(newStandardProduct: StandardProducts) {

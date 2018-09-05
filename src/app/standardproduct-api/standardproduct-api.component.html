@@ -1,12 +1,35 @@
   <h1>Pick one or many standard products</h1>
-  <div>{{stringProductsArray}}</div>
-    
-  <div *ngFor="let sp of standardproducts;">
-    <input type="checkbox" id="{{sp.Id}}" >
-    <label for="{{sp.Id}}">"{{sp.Name}} - {{sp.Description}} - {{sp.Price}} - {{sp.Category}}"</label>
-  </div>    
+    <tr>
+      <td>
+        Product Name
+      </td>
+      <td>
+        Description
+      </td>
+      <td>
+        Price
+      </td>
+      <td>
+        Category
+      </td>
+      <td>
+        Add to cart
+      </td>
+    </tr>
+    <tr *ngFor="let sp of standardproducts;">
+      <td>{{sp.Name}}</td>
+      <td>{{sp.Description}}</td>
+      <td>{{sp.Price}}</td>
+      <td>{{sp.Category}}</td>
+      <td>
+        <input type="button" id="a{{sp.Id}}" (click)="add(sp.Id)" value="+">
+      </td>
+      <td>
+        {{message}}
+      </td>
+    </tr>
   <br>
-  <button type="button">Send to Cart</button>
+  <button (click)="toTheCart()" type="button">Send to Cart</button>
   <br><br>
   <a href="home" (click)="SendMeHome()">Go Home</a>
 
