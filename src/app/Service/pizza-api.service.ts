@@ -13,8 +13,8 @@ import { ShoppingCartItem } from '../standardproduct-api/standardproduct-api.com
 })
 export class PizzaAPIService {
 
-  url: string = "https://revproject2api.azurewebsites.net/api";
-  //url: string = "http://localhost:55672/api";
+  //url: string = "https://revproject2api.azurewebsites.net/api";
+  url: string = "http://localhost:55672/api";
   urlAccount = this.url+"/Account";
   urlIngredients: string = this.url+"/Ingredients";
   urlSP: string = this.url+"/StandardProducts";
@@ -148,6 +148,17 @@ export class PizzaAPIService {
       headers
     });
   }
+
+  getCart() {
+    return this.client.get<ShoppingCartViewModel>(this.urlSC+'/');
+  }
+}
+
+export class ShoppingCartViewModel {
+  UserId: number;
+  Price: number;
+  Items: ShoppingCartItem[];
+
 }
 
 export class loginResponse {
