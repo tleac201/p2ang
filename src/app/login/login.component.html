@@ -1,0 +1,10 @@
+<form>
+  Email:<br>
+  <input type="text" #email><br>
+  Password:<br>
+  <input type="password" #password ><br><br>
+  <input type="submit" value="Submit" (click)="login(email.value, password.value)">
+  <a href="register" (click)="SendToRegister()">Register Account</a><br>
+</form>
+
+
